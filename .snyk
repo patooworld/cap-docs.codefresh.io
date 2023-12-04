@@ -1,0 +1,86 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.25.1
+ignore: {}
+# patches apply the minimum changes required to fix a vulnerability
+patch:
+  SNYK-JS-LODASH-567746:
+    - '@babel/core > lodash':
+        patched: '2023-12-04T22:57:44.446Z'
+        id: SNYK-JS-LODASH-567746
+        path: '@babel/core > lodash'
+    - eslint > lodash:
+        patched: '2023-12-04T22:57:44.446Z'
+        id: SNYK-JS-LODASH-567746
+        path: eslint > lodash
+    - karma > lodash:
+        patched: '2023-12-04T22:57:44.446Z'
+        id: SNYK-JS-LODASH-567746
+        path: karma > lodash
+    - node-sass > lodash:
+        patched: '2023-12-04T22:57:44.446Z'
+        id: SNYK-JS-LODASH-567746
+        path: node-sass > lodash
+    - stylelint > lodash:
+        patched: '2023-12-04T22:57:44.446Z'
+        id: SNYK-JS-LODASH-567746
+        path: stylelint > lodash
+    - stylelint-order > lodash:
+        patched: '2023-12-04T22:57:44.446Z'
+        id: SNYK-JS-LODASH-567746
+        path: stylelint-order > lodash
+    - stylelint-scss > lodash:
+        patched: '2023-12-04T22:57:44.446Z'
+        id: SNYK-JS-LODASH-567746
+        path: stylelint-scss > lodash
+    - eslint > inquirer > lodash:
+        patched: '2023-12-04T22:57:44.446Z'
+        id: SNYK-JS-LODASH-567746
+        path: eslint > inquirer > lodash
+    - eslint > table > lodash:
+        patched: '2023-12-04T22:57:44.446Z'
+        id: SNYK-JS-LODASH-567746
+        path: eslint > table > lodash
+    - stylelint > table > lodash:
+        patched: '2023-12-04T22:57:44.446Z'
+        id: SNYK-JS-LODASH-567746
+        path: stylelint > table > lodash
+    - htmllint-cli > htmllint > lodash:
+        patched: '2023-12-04T22:57:44.446Z'
+        id: SNYK-JS-LODASH-567746
+        path: htmllint-cli > htmllint > lodash
+    - karma > combine-lists > lodash:
+        patched: '2023-12-04T22:57:44.446Z'
+        id: SNYK-JS-LODASH-567746
+        path: karma > combine-lists > lodash
+    - node-sass > sass-graph > lodash:
+        patched: '2023-12-04T22:57:44.446Z'
+        id: SNYK-JS-LODASH-567746
+        path: node-sass > sass-graph > lodash
+    - postcss-cli > postcss-reporter > lodash:
+        patched: '2023-12-04T22:57:44.446Z'
+        id: SNYK-JS-LODASH-567746
+        path: postcss-cli > postcss-reporter > lodash
+    - stylelint > postcss-reporter > lodash:
+        patched: '2023-12-04T22:57:44.446Z'
+        id: SNYK-JS-LODASH-567746
+        path: stylelint > postcss-reporter > lodash
+    - stylelint-order > postcss-sorting > lodash:
+        patched: '2023-12-04T22:57:44.446Z'
+        id: SNYK-JS-LODASH-567746
+        path: stylelint-order > postcss-sorting > lodash
+    - karma > log4js > hipchat-notifier > lodash:
+        patched: '2023-12-04T22:57:44.446Z'
+        id: SNYK-JS-LODASH-567746
+        path: karma > log4js > hipchat-notifier > lodash
+    - node-sass > gaze > globule > lodash:
+        patched: '2023-12-04T22:57:44.446Z'
+        id: SNYK-JS-LODASH-567746
+        path: node-sass > gaze > globule > lodash
+    - karma > log4js > mailgun-js > async > lodash:
+        patched: '2023-12-04T22:57:44.446Z'
+        id: SNYK-JS-LODASH-567746
+        path: karma > log4js > mailgun-js > async > lodash
+    - karma > log4js > slack-node > requestretry > lodash:
+        patched: '2023-12-04T22:57:44.446Z'
+        id: SNYK-JS-LODASH-567746
+        path: karma > log4js > slack-node > requestretry > lodash
