@@ -51,9 +51,9 @@
   "devDependencies": {
     "@babel/cli": "^7.8.4",
     "@babel/core": "^7.8.7",
-    "@babel/preset-env": "7.0.0-beta.38",
+    "@babel/preset-env": "7.0.0",
     "autoprefixer": "^7.2.5",
-    "babel-eslint": "^8.2.1",
+    "babel-eslint": "^9.0.0",
     "babel-plugin-transform-es2015-modules-strip": "^0.1.1",
     "bootstrap": "^4.0.0",
     "bundlesize": "^0.18.0",
