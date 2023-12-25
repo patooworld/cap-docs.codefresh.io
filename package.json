@@ -81,7 +81,7 @@
     "shelljs": "^0.8.1",
     "shx": "^0.2.2",
     "sri-toolbox": "^0.2.0",
-    "stylelint": "^8.4.0",
+    "stylelint": "^16.1.0",
     "stylelint-config-recommended-scss": "^3.0.0",
     "stylelint-config-standard": "^18.0.0",
     "stylelint-order": "^0.8.0",
