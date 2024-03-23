@@ -1,6 +1,7 @@
 ---
 title: "Manage users"
 description: ""
+canonical_url: 'https://codefresh.io/docs/docs/administration/account-user-management/add-users/'
 group: administration
 toc: true
 ---
@@ -49,9 +50,9 @@ For guidelines on access control, see [Access control]({{site.baseurl}}/docs/adm
 The user receives an email invitation, and the Users page is updated with information on the user. 
 The Status column shows Invite sent until the user accepts the invitation, when the user account is created. 
 
-> For invitations pending accept, select ![](/images/administration/users/icon-Send.png?display=inline-block) **Resend invite**.  
-  To edit account settings, select ![](/images/administration/users/icon-Edit.png?display=inline-block) **Edit**.  
-  To remove the user account, select ![](/images/administration/users/icon-Delete.png?display=inline-block) **Delete**.
+> For invitations pending accept, select <!---![](/images/administration/users/icon-Send.png?display=inline-block)--> **Resend invite**.  
+  To edit account settings, select <!---![](/images/administration/users/icon-Edit.png?display=inline-block)--> **Edit**.  
+  To remove the user account, select <!---![](/images/administration/users/icon-Delete.png?display=inline-block)--> **Delete**.
 
 
 ### Troubleshoot add users
