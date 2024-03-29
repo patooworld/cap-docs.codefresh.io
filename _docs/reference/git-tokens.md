@@ -1,6 +1,7 @@
 ---
 title: "Git tokens"
 description: ""
+canonical_url: 'https://codefresh.io/docs/docs/reference/git-tokens/'
 group: reference
 redirect_from:
   - /docs/administration/git-tokens/ 
@@ -28,7 +29,7 @@ Codefresh requires two types of Git tokens for authentication:
 
 
 
-### Git runtime tokens
+### Git runtime token scopes
 The Git runtime token is mandatory for runtime installation.
 
 {::nomarkdown}
@@ -53,18 +54,19 @@ The Git runtime token is mandatory for runtime installation.
 </br>
 {:/}
 
-#### Bitbucket Cloud & Bitbucket Server runtime token scopes
+#### Bitbucket Cloud and Bitbucket Server runtime token scopes
 
-* `Project admin`
-* `Repository write`
-* `Project read`
+* **Account**: `Read`
+* **Workspace membership**: `Read`
+* **Webhooks**: `Read and write`
+* **Repositories**: `Write`, `Admin`
 
 {::nomarkdown}
 </br></br>
 {:/}
 
 ### Git personal tokens
-The Git personal token is a user-specific personal access token per provisioned runtime. Unique to each user, it is required after installation to authenticate Git-based actions per runtime in Codefresh. 
+The Git personal token is a user-specific personal access token per provisioned runtime. Unique to each user, it may be required after to authenticate Git-based actions per runtime in Codefresh, based on how your admin has set up authentication for Git providers. 
 
 > If you have access to multiple runtimes, you can use the same personal access token for all the runtimes.   
   You must configure the token for each runtime.
@@ -73,7 +75,7 @@ The Git personal token is a user-specific personal access token per provisioned 
 </br>
 {:/}
 
-#### GitHub & GitHub Enterprise personal user token scopes
+#### GitHub and GitHub Enterprise personal user token scopes
 * `repo`
 
 <!---{% include 
@@ -89,7 +91,7 @@ The Git personal token is a user-specific personal access token per provisioned 
 </br>
 {:/}
 
-#### GitLab Cloud & GitLab Server personal user token scopes
+#### GitLab Cloud and GitLab Server personal user token scopes
 
 * `write_repository` (includes `read-repository`)
 * `api-read`
@@ -98,10 +100,11 @@ The Git personal token is a user-specific personal access token per provisioned 
 </br>
 {:/}
 
-#### Bitbucket Cloud & Bitbucket Server personal user token scopes
+#### Bitbucket Cloud and Server personal user token scopes
 
-* `Project read`
-* `Repository write`
+* **Account**: `Read`
+* **Workspace membership**: `Read`
+* **Repositories**: `Write`, `Admin`
 
 ### Related articles  
 [User settings]({{site.baseurl}}/docs/administration/user-settings/)

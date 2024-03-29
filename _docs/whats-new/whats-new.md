@@ -1,15 +1,418 @@
 ---
 title: "What's new in Codefresh?"
 description: ""
+canonical_url: 'https://codefresh.io/docs/docs/whats-new/gitops-whats-new/'
 group: whats-new
 redirect_from:
   - /docs/whats-new/
 toc: true
 ---
 
-Built on Argo, the world’s most popular and fastest-growing open source software delivery, Codefresh unlocks the full enterprise potential of Argo Workflows, Argo CD, Argo Events, and Argo Rollouts, providing a control-plane for managing them at scale.  
+Built on Argo, the world’s most popular and fastest-growing open source software delivery, Codefresh unlocks the full enterprise potential of Argo Workflows, Argo CD, Argo Events, and Argo Rollouts, providing a control-plane for managing them at scale.
 
 
+## January 2023
+
+### Features & enhancements
+
+<br />
+
+#### SSH for runtimes
+We added the option to configure SSH for runtime accounts, in addition to the default HTTPS. You need the SSH private key for your Git provider, and add it to your Git credentials for the runtime in Codefresh.  Switch to the List view, and select **Update Git Runtime Credentials**. 
+
+
+{% include
+ image.html
+ lightbox="true"
+ file="/images/whats-new/rel-notes-jan23-configure-ssh-for-runtimes.png"
+ url="/images/whats-new/rel-notes-jan23-configure-ssh-for-runtimes.png"
+ alt="SSH for runtime"
+ caption="SSH for runtime"
+ max-width="50%"
+%}
+
+Adding SSH to runtime accounts allows you to also use SSH to connect to Git repositories when creating or editing application definitions. 
+
+For details, see [Configure SSH for runtimes]({{site.baseurl}}/docs/runtime/monitor-manage-runtimes/#configure-ssh-for-runtimes).
+
+#### Artifact visualization in Argo Workflows
+
+Argo Workflows v3.4 introduced artifact visualization in the Argo UI. You can now visualize workflow artifacts in Codefresh through the Artifacts tab in Workflows. You can also download it if you need to. 
+
+{% include
+ image.html
+ lightbox="true"
+ file="/images/whats-new/rel-notes-jan23-workflow-artifact.png"
+ url="/images/whats-new/rel-notes-jan23-workflow-artifact.png"
+ alt="Artifact visualization for workflow"
+ caption="Artifact visualization for workflow"
+ max-width="60%"
+%}
+
+#### Manual rollback for rollouts
+
+
+Manually rollback a completed rollout to a previous revision when and if needed. If after a successful analysis run and rollout, your application is not functioning as it should, 
+you can rollback to a prior revision from the Rollout's revision history (path [`spec.revisionHistoryLimit`](https://argoproj.github.io/argo-rollouts/features/specification/#rollout-specification){:target="\_blank"}). Manual rollback changes the live state of the rollout resource to the state in the previous commit that you select. 
+
+The rollback is implemented from the Timeline tab by clicking first the rollout name, selecting the revision to rollback to, and finally clicking the **Rollback to** button in the Rollout Player.
+
+{% include
+ image.html
+ lightbox="true"
+ file="/images/whats-new/rel-notes-jan23-rollout-rollback.png"
+ url="/images/whats-new/rel-notes-jan23-rollout-rollback.png"
+ alt="Completed Rollout in Timeline"
+ caption="Completed Rollout in Timeline"
+ max-width="60%"
+%}
+
+Before you approve and commit the rollback, you can view the changes in each revision. 
+
+{% include
+ image.html
+ lightbox="true"
+ file="/images/whats-new/rel-notes-jan23-rollout-rev-select.png"
+ url="/images/whats-new/rel-notes-jan23-rollout-rev-select.png"
+ alt="Select rollout revision for rollback"
+ caption="Select rollout revision for rollback"
+ max-width="60%"
+%}
+
+#### Application enhancements
+
+* **Indication for disabled auto-sync**  
+  Whenever auto-sync is disabled for an application, the application header displays an indication that auto-sync is off. 
+
+  {% include
+ image.html
+ lightbox="true"
+ file="/images/whats-new/rel-notes-jan23-auto-sync-on-off.png"
+ url="/images/whats-new/rel-notes-jan23-auto-sync-on-off.png"
+ alt="Auto-sync OFF in application header"
+ caption="Auto-sync OFF in application header"
+ max-width="60%"
+%}
+
+* **Single filter for _Unhealthy_ applications in Applications dashboard**  
+  The Health status filter in the Applications dashboard includes an option to filter by all statuses that are not Healthy, at the same time. Instead of having to filter by each status individually, select **Select all Unhealthy statuses** to filter by Degraded, Missing, Progressing, Suspended, Terminated and Unknown statuses. 
+  
+{% include
+ image.html
+ lightbox="true"
+ file="/images/whats-new/rel-notes-jan23-unhealthy-status-filter.png"
+ url="/images/whats-new/rel-notes-jan23-unhealthy-status-filter.png"
+ alt="Applications dashboard: Unhealthy status filter"
+ caption="Applications dashboard: Unhealthy status filter"
+ max-width="60%"
+%}
+
+* **SSH URLs for applications**  
+  When you create or edit an application, if your runtime has been configured with SSH, you can also define the app's URL as SSH.  
+  Select the SSH tab and the URL, and let Codefresh auto-complete the URL definition in the format required for SSH.
+
+
+
+
+* **Filter app resources through Resource Inventory**  
+  From this release, all resource types in the Resource Inventory (bottom-left in the Current State > Tree view) are work as filters. Previously, you could filter only by the Out-of-sync resource type.
+  
+{% include
+ image.html
+ lightbox="true"
+ file="/images/whats-new/rel-notes-jan23-inventory-filter-type.png"
+ url="/images/whats-new/rel-notes-jan23-inventory-filter-type.png"
+ alt="Current State > Tree View: Filter by resource type"
+ caption="Current State > Tree View: Filter by resource type"
+ max-width="60%"
+%}
+
+
+#### Argo Project enhancements
+
+* **New Workflow Templates in Codefresh Hub for Argo**  
+  We are always working on ways to make your work easier. And in this release, we added several Workflow templates that focus on workflow commands to Codefresh Hub for Argo. Check out the [Terminate, Stop, Suspend, and Resume templates](https://codefresh.io/argohub/workflow-template/argo-workflows){:target="\_blank"}. 
+
+{% include
+ image.html
+ lightbox="true"
+ file="/images/whats-new/rel-notes-jan23-workflow-templates.png"
+ url="/images/whats-new/rel-notes-jan23-workflow-templates.png"
+ alt="New Workflow Templates in Codefresh Hub for Argo"
+ caption="New Workflow Templates in Codefresh Hub for Argo"
+ max-width="60%"
+%}
+*  **Argo CD upgrade**  
+  We have upgraded Argo CD version to 2.5. Read more on what this version includes in the [official documentation](https://argo-cd.readthedocs.io/en/stable/operator-manual/upgrading/2.4-2.5/){:target="\_blank"}.  
+
+* **Argo Rollouts upgrade**  
+  We have upgraded our Argo Rollouts version to 1.4rc-1. Read more this version of Argo Rollouts in their [official blog](https://blog.argoproj.io/argo-rollouts-1-4-release-8275a0d364be){:target="\_blank"}.
+
+
+### Bug fixes
+
+**Runtimes**  
+* Hybrid runtime installation fails when Git repo definition includes subdirectory.
+* Unable to add GKE Autopilot Cluster to Hosted runtime.
+* Argo-hub pipeline does not work with PR from forked repo.
+* Runtime fails to install after autopilot-bootstrap with a non-default branch. 
+
+**Workflows and applications**  
+* Workflow state not updated on clicking Retry.
+* `jsonBody` displayed as an unknown field in AnalysisTemplate.
+* Incorrect data in Home and DORA dashboards.
+* Cron event inconsistency.
+
+
+
+## December 2022
+
+### Features & enhancements
+
+<br />
+
+
+#### GitOps CLI version validation and upgrade
+We have enhanced the user experience for CLI upgrades to make it intuitive and simple. No need to constantly check the CLI version to keep up with and get access to new features we are releasing. 
+Now the CLI automatically self-checks its version, and if a newer version is available, prints a banner with the notification that a new version is available, also including the upgrade command (`cf upgrade`).
+
+{% include
+ image.html
+ lightbox="true"
+ file="/images/whats-new/rel-notes-dec22-cli-upgrade-banner.png"
+ url="/images/whats-new/rel-notes-dec22-cli-upgrade-banner.png"
+ alt="Upgrade banner for Codefresh CLI"
+ caption="Upgrade banner for Codefresh CLI"
+ max-width="60%"
+%}
+
+You can upgrade to a specific version, or download the latest version to an output folder to upgrade at your convenience.  
+
+For details, see [Upgrade the Codefresh CLI]({{site.baseurl}}/docs/clients/csdp-cli/#upgrade-codefresh-cli).
+
+<br />
+
+#### Tunnel-based as default runtime mode
+In the previous release, we introduced the Tunnel-based option for Hybrid GitOps runtimes.
+It is now configured as the default runtime mode for Hybrid GitOps. For silent installations, you don't need to specify an access mode. For Wizard-based install, when prompted to select the Access mode, select Tunnel-based. 
+
+{% include
+ image.html
+ lightbox="true"
+ file="/images/whats-new/rel-notes-dec22-cli-access-mode.png"
+ url="/images/whats-new/rel-notes-dec22-cli-access-mode.png"
+ alt="Access mode in CLI Wizard"
+ caption="Access mode in CLI Wizard"
+ max-width="60%"
+%}
+
+Access mode selection is relevant only for new runtime installations. Upgrading existing runtimes does not change the access mode for those runtimes.
+
+For details, see [Access mode in Runtime flags]({{site.baseurl}}/docs/runtime/installation/#runtime-flags).
+
+<br />
+
+#### Git provider selection in CLI Wizard
+When installing the Hybrid GitOps runtime, Codefresh automatically detects the Git provider based on the repository URL provided during the installation.
+If Codefresh is unable to detect the Git provider, as for on-premises Git providers, you can now select the Git provider from the list.  
+
+{% include
+ image.html
+ lightbox="true"
+ file="/images/whats-new/rel-notes-dec22-cli-git-provider-select.png"
+ url="/images/whats-new/rel-notes-dec22-cli-git-provider-select.png"
+ alt="Git provider selection CLI Wizard"
+ caption="Git provider selection CLI Wizard"
+ max-width="60%"
+%}
+
+<br />
+
+#### Reset shared configuration repo
+Codefresh creates the shared configuration repository when you install the first Hybrid or Hosted GitOps runtime for your account, and then uses it for all runtimes you add to the same account.
+You may want to re-initialize the shared configuration repository for your account to point to a different runtime environment. For example, when moving from evaluation to production environments.  
+
+You can do so by first uninstalling existing runtimes in your account and then running the reset command. On the next runtime installation, Codefresh re-initializes the shared configuration repo to point to the new location.
+
+>Reset shared configuration repo is supported from CLI v0.1.18 and higher.
+
+For details, see [Reset shared configuration repository]({{site.baseurl}}/docs/runtime/monitor-manage-runtimes/#reset-shared-configuration-repository).
+
+<!--#### Rollout steps in Current State CR-15855
+today users can access the rollouts steps only from the timeline view. We want users to be able to see it from the current state view as well, when clicking on a rollout. 
+Add a tab to the rollout drawer with the "steps" -->
+
+### Bug fixes
+
+**Runtimes**  
+* App-proxy fails to connect if `cfHost` ends with `/`. 
+* Missing Codefresh context generates segmentation violation error.
+* Unclear error message when upgrading CLI to a version that does not exist.
+* Bitbucket returns false in `isValid` field for expired runtime token.
+* SIGSEGV on installing runtime with CLI version 01.17. 
+
+**Applications**  
+* Image-applications of deleted application not removed from database. 
+* Incorrect results when filtering by Cluster in DORA dashboard.
+* Incorrect time displayed in Lead Time For Changes in DORA dashboard.
+* 'Git Source not found error' when trying to edit an application not based on a Git Source. 
+* Modified resource not displayed correctly in Application dashboard > Timeline tab.
+
+**Others**  
+* Integrations page remains indefinitely in loading state.
+* Filtering Workflow Templates by Git Source does not work.
+* Workflow Logs terminal flickers and self-refreshes constantly.
+
+
+
+
+
+## November 2022
+
+### Features & enhancements
+
+<br />
+
+
+#### Tunnel-based hybrid runtimes
+Simplify installation without compromising on security with our tunnel-based installation option for hybrid runtimes.  
+
+Tunnel-based runtimes use tunneling for communication between the customer cluster and the Codefresh platform, with the customer cluster initiating the  tunneling request.   Simply add  the flag `--access-mode` with `tunnel` as the value and you have your tunnel-based runtime without an ingress controller. 
+
+See [Tunnel-based runtime architecture]({{site.baseurl}}/docs/getting-started/architecture/#tunnel-based-hybrid-runtime-architecture) and [Tunnel-based runtime flags]({{site.baseurl}}/docs/runtime/installation/#tunnel-based-runtime-flags).
+
+{::nomarkdown}
+<br>
+{:/}
+
+#### Bitbucket Cloud for hosted runtimes
+Hosted runtimes now support Bitbucket Cloud as a Git provider.
+
+{::nomarkdown}
+<br>
+{:/}
+
+#### Card view for applications
+A scannable Card view offers a new layout for applications in the Applications dashboard. 
+Quickly scan application information top-down, starting with the health and sync statuses, followed by repo and runtime information, and easy access to the available actions at the bottom of the card. 
+
+{% include
+ image.html
+ lightbox="true"
+ file="/images/whats-new/rel-notes-nov22-card-view.png"
+ url="/images/whats-new/rel-notes-nov22-card-view.png"
+ alt="Card view of applications"
+ caption="Card view of applications"
+ max-width="60%"
+%}
+
+{::nomarkdown}
+<br>
+{:/}
+
+#### More application alerts
+We added custom warnings for common scenarios with application deployment to our Errors/Warning panel, that both alert you to the problems and possible actions to resolve them.
+
+**Missing Argo Rollouts controller**  
+Applications with rollout resources need Argo Rollouts on the managed cluster to execute rollout instructions and deploy the application.
+If the Argo Rollouts controller is missing, you get a warning with the option to install Argo Rollouts on the cluster.  
+
+**Long application sync**  
+Application sync can continue indefinitely because of issues with the application that you need to troubleshoot, unrelated to Codefresh.  
+A new warning alerts you to sync operations that exceed 30 minutes.  
+The View Details option takes you directly to the Sync Results tab with details on the sync job and failed hooks, and the option to terminate the sync, and then troubleshoot the application. 
+
+{% include
+ image.html
+ lightbox="true"
+ file="/images/whats-new/rel-notes-nov22-app-warnings.png"
+ url="/images/whats-new/rel-notes-nov22-app-warnings.png"
+ alt="Example of warning for missing Argo Rollouts controller"
+ caption="Example of warning for missing Argo Rollouts controller"
+ max-width="60%"
+%}
+
+See [Identify applications with errors/warnings]({{site.baseurl}}/docs/deployment/applications-dashboard/#identify-applications-with-warningserrors).
+
+{::nomarkdown}
+<br>
+{:/}
+
+#### Hide extraneous resources from Current State views
+Streamline Current State views for your application's resources by hiding resources not native to the application.   
+The Ignore Extraneous filter allows you to hide resources generated by tools, whose sync status _does not_ affect the sync status of the application. `ConfigMap` and `pods` are examples of such resources.  
+Once you add the  `IgnoreExtraneous` annotation to the resource, clicking the Ignore Extraneous filter hides the resource from the Current State views.  
+
+{% include
+ image.html
+ lightbox="true"
+ file="/images/whats-new/rel-notes-nov-22-ignore-extraneous-annotation.png"
+ url="/images/whats-new/rel-notes-nov-22-ignore-extraneous-annotation.png"
+ alt="Example of resource with IgnoreExtraneous annotation"
+ caption="Example of resource with IgnoreExtraneous annotation"
+ max-width="60%"
+%}
+
+See [Filters for application resources]({{site.baseurl}}/docs/deployment/applications-dashboard/#filters-for-application-resources).
+{::nomarkdown}
+<br>
+{:/}{::nomarkdown}
+<br>
+{:/}
+
+### Bug fixes
+
+{::nomarkdown}
+<br>
+{:/}
+
+**Runtimes**  
+* "Failed to create default-git-source" error during hybrid runtime installation.
+* Self-signed certificates and private root CA (Certificate Authority) not supported for on-premises Git providers.
+* Upgrade runtime failure when copying and pasting CLI command from Codfresh UI.
+* Runtime installation reports errors as warnings.
+* Invalid GitLab token passes validation.
+* Status not updated for deleted PAT (Personal Access Token) in User Settings. 
+* GitLab repos with multiple levels incorrectly truncated to the first level in Codefresh UI.
+* Missing `--provider` flag when creating Git Sources via CLI.
+* INTERNAL_SERVER_ERROR when installing a runtime using `--shared-config-repo` flag with GitLab.
+
+{::nomarkdown}
+<br>
+{:/}
+
+**Applications**    
+* Incorrect status for current sync operation.
+* No results on applying filters in DORA metrics dashboard.
+* Broken links between parent and child applications in Application Set in Applications dashboard > List view.
+* Discrepancy between status in health snapshot filter and corresponding list of applications.
+* Resources with Missing health status not displayed in Current State.
+* "No Git Source with write permissions" error on creating application.
+* Deleted applications shown as errors in the Error/Warning panel.
+* Wrong commit message in the Timelines tab for Git Source-applications.
+* PR (Pull Request) number in the  Timelines tab does not match the commit in the Application header.
+* No indication for extended application sync operations.
+* Codefresh UI does not sync applications as part of Application Set.
+* No option to terminate sync for indefinitely syncing applications. 
+* Scrolling up/down in Current State > Tree View causes resource nodes to move off the screen.
+
+{::nomarkdown}
+<br>
+{:/}
+
+**Delivery Pipelines and workflows**  
+* Pipeline failure when there are two or more trigger conditions with the same event. 
+* Formatting issues for logs with timestamps.
+* Change in Delivery Pipeline manifest overrides current sensor configuration.
+* No error message for step with invalid dependency.
+
+{::nomarkdown}
+<br>
+{:/}
+
+**Others**  
+* Safari: Clicking Settings icon on the toolbar does not open Configuration page.
+* No option to log out on selecting an incorrect authentication provider.
 
 ## October 2022
 
@@ -51,7 +454,7 @@ See [Git provider and repo flags]({{site.baseurl}}/docs/runtime/installation/#gi
 <br>
 {:/}
 
-### Turn off notifications for runtimes
+#### Turn off notifications for runtimes
 Codefresh alerts you to runtimes that are insecure or have invalid or expired Git personal access tokens. You can turn off these notifications selectively for runtimes for which these alerts are less critical, such as non-production runtimes.  
 
 The option is user-specific, and applies only to runtimes in the user's account. 
@@ -353,7 +756,7 @@ Once defined, you can reference the integration by name in the CI platforms.
     max-width="70%"
 %}
 
-See [GitHub Container registry]({{site.baseurl}}/docs/integrations/ci-integrations/container-registries/github-cr/).
+See [GitHub Container registry]({{site.baseurl}}/docs/integrations/container-registries/github-cr/).
 
 #### Labels and annotations for managed clusters
 The Codefresh CLI supports labels and annotations for managed clusters.  
@@ -603,7 +1006,7 @@ Codefresh warns you of the implication of deleting the selected application in t
 max-width="50%"
 %}
 
-See [Update application configuration]({{site.baseurl}}/docs/deployment/create-application/#update-application-configuration) and [Delete an application]({{site.baseurl}}/docs/deployment/create-application/#delete-an-application).
+See [Update application configuration]({{site.baseurl}}/docs/deployment/create-application/#update-application-configuration) and [Delete an application]({{site.baseurl}}/docs/deployment/manage-application/#delete-an-application).
 
 {::nomarkdown}
 <br>
@@ -708,7 +1111,7 @@ After defining the repository in which to store configuration settings, you can 
 
 Older versions of hybrid runtimes without the shared repository must be upgraded to the latest version  to  leverage the  shared configuration, specifically for integrations with CI platforms and tools.  
 
-For details, see [Shared runtime configuration]({{site.baseurl}}/docs/runtime/shared-configuration/).
+For details, see [Shared runtime configuration]({{site.baseurl}}/docs/reference/shared-configuration/).
 
 #### Logs for runtime components
 View and download logs for runtimes and runtime components. The logs record events from the time of application launch for all resources in the application.  
@@ -792,7 +1195,7 @@ Logs are displayed if the resource has logs:
 * For online viewing, you have free-text search and line-wrap functionalities. 
 * For offline viewing and analysis, you can download the complete log into a text file.   
 
-For details, see [Current State Tree view]({{site.baseurl}}/docs/deployment/applications-dashboard/#current-state-tree-view).
+For details, see [Current State Tree view]({{site.baseurl}}/docs/deployment/applications-dashboard/#select-view-mode-for-the-applications-dashboard).
 
 #### Application rollout visualization 
 In addition to installing Argo Rollouts in your cluster, visualize Argo Rollout history and progress directly in the Applications (deployment) dashboard. Visualize rollouts from multiple clusters and runtimes in a single centralized location through the Deployment tab.
@@ -831,7 +1234,7 @@ As the rollout occurs, visualize step-by-step progress. Expanding Background Ana
    max-width="30%" 
   %}
 
-For details, see [Rollout progress and step visualization]({{site.baseurl}}/docs/deployment/applications-dashboard/#rollout-progress-visualization).
+For details, see [Rollout progress and step visualization]({{site.baseurl}}/docs/deployment/applications-dashboard/#monitor-rollouts-by-deployment).
 
 #### Nested workflows
 Add nested workflow functionality to Codefresh pipelines. A nested workflow is a step within the parent workflow that either submits a new workflow, or creates a PR (Pull Request) that runs a different workflow based on the PR result.

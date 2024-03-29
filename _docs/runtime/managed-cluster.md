@@ -1,6 +1,7 @@
 ---
 title: "Add external clusters to runtimes"
 description: ""
+canonical_url: 'https://codefresh.io/docs/docs/installation/gitops/managed-cluster/'
 group: runtime
 toc: true
 ---
@@ -218,12 +219,12 @@ secretGenerator:
   namespace: kube-system
  
 resources:
-  - https://github.com/codefresh-io/cli-v2/manifests/add-cluster/kustomize?ref=<runtimeVersion>
+  - https://github.com/codefresh-io/csdp-official/add-cluster/kustomize?ref=<runtimeVersion>
 ```
 
 
 ### Work with managed clusters 
-Work with managed clusters in hybrid or hosted runtimes in either the Topology or List runtime views. For information on runtime views, see [Runtime views]({{site.baseurl}}/docs/runtime/runtime-views).  
+Work with managed clusters in hybrid or hosted runtimes in either the Topology or List runtime views. For information on runtime views, see [Runtime views]({{site.baseurl}}/docs/runtime/monitor-manage-runtimes/#runtime-views).  
 As the cluster is managed through the runtime, updates to the runtime automatically updates the components on all the managed clusters that include it. 
      
 View connection status for the managed cluster, and health and sync errors. Health and sync errors are flagged by the error notification in the toolbar, and visually flagged in the List and Topology views.  

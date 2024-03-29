@@ -1,6 +1,7 @@
 ---
 title: "User settings"
 description: ""
+canonical_url: 'https://codefresh.io/docs/docs/administration/user-self-management/user-settings/'
 group: administration
 toc: true
 ---
@@ -35,7 +36,7 @@ You can disable this security setting at any time.
 > Codefresh personnel takes action only after confirmation from you, and all actions are audited.
 
 1. In the CSDP UI, go to [User Settings](https://g.codefresh.io/2.0/user-settings){:target="\_blank"}.
-1. Enable **Allow Codefresh support tem to log in...**.
+1. Enable **Allow Codefresh support team to log in...**.
 
 {% include 
    image.html 
@@ -61,9 +62,9 @@ Authorize Git access with OAuth2 if your account admin has set up Codefresh as a
 Make sure you have:
 * For Bitbucket only, your Bitbucket account username
 * If needed, a _personal access token_ from your Git provider with the required scopes:
-  * [GitHub]({{site.baseurl}}/#generate-github-personal-access-tokens)
-  * [GitLab]({{site.baseurl}}/#generate-gitlab-personal-access-tokens)
-  * [Bitbucket]({{site.baseurl}}/#generate-bitbucket-personal-access-tokens)
+  * [GitHub](#generate-github-personal-access-tokens)
+  * [GitLab](#generate-gitlab-personal-access-tokens)
+  * [Bitbucket](#generate-bitbucket-personal-access-tokens)
 
 
 **How to**
