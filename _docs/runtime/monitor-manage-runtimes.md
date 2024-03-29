@@ -1,6 +1,7 @@
 ---
 title: "Manage provisioned runtimes"
 description: ""
+canonical_url: 'https://codefresh.io/docs/docs/installation/gitops/monitor-manage-runtimes/'
 group: runtime
 redirect_from:
   - /monitor-manage-runtimes/
@@ -10,15 +11,35 @@ toc: true
 
 
 The **Runtimes** page displays the provisioned runtimes in your account, both hybrid, and the hosted runtime if you have one.  
+
+View runtime components and information in List or Topology view formats, and upgrade, uninstall, and migrate runtimes.  
+
+{% include
+   image.html
+   lightbox="true"
+   file="/images/runtime/runtime-list-view.png"
+ url="/images/runtime/runtime-list-view.png"
+  alt="Runtime List View"
+  caption="Runtime List View"
+  max-width="70%"
+%}
+
 Select the view mode to view runtime components and information, and manage provisioned runtimes in the view mode that suits you.  
 
-> Unless specified otherwise, management options are common to both hybrid and hosted runtimes.
 
-* Add managed clusters to hybrid or hosted runtimes (see [Adding & managing external clusters]({{site.baseurl}}/docs/runtime/managed-cluster/))
-* Add and manage Git Sources associated with hybrid or hosted runtimes (see [Adding & managing Git Sources]({{site.baseurl}}/docs/runtime/git-sources/))
-* Upgrade provisioned hybrid runtimes
-* Uninstall hybrid or hosted runtimes
-* Update Git runtime tokens
+Manage provisioned runtimes: 
+* [Update Git tokens for runtimes](#update-git-tokens-for-runtimes)
+* [Configure SSH for runtimes](#configure-ssh-for-runtimes)
+* [Add managed clusters to hybrid or hosted runtimes]({{site.baseurl}}/docs/runtime/managed-cluster/)
+* [Add and manage Git Sources associated with hybrid or hosted runtimes]({{site.baseurl}}/docs/runtime/git-sources/)
+* [Reset shared configuration repository](#reset-shared-configuration-repository)
+* [Upgrade provisioned hybrid runtimes](#hybrid-upgrade-provisioned-runtimes)
+* [Upgrade Codefresh CLI](#upgrade-codefresh-cli)
+* [Uninstall provisioned runtimes](#uninstall-provisioned-runtimes)
+* [Update Git tokens for runtimes](#update-git-tokens-for-runtimes)
+<!--* [Migrate access mode for hybrid runtimes](#hybrid-migrate-runtimes) -->
+
+> Unless specified otherwise, management options are common to both hybrid and hosted runtimes. If an option is valid only for hybrid runtimes, it is indicated as such. 
 
 To monitor provisioned hybrid runtimes, including recovering runtimes for failed clusters, see [Monitor provisioned hybrid runtimes]({{site.baseurl}}/docs/runtime/monitoring-troubleshooting/).
 
@@ -52,7 +73,7 @@ Here is a description of the information in the List View.
 |**Name**| The name of the provisioned Codefresh runtime.  |
 |**Type**| The type of runtime provisioned, and can be **Hybrid** or **Hosted**.  |
 |**Cluster/Namespace**| The K8s API server endpoint, as well as the namespace with the cluster. |
-|**Modules**| The modules installed based on the type of provisioned runtime. Hybrid runtimes include CI amnd CD Ops modules. Hosted runtimes inlcude CD Ops.   |
+|**Modules**| The modules installed based on the type of provisioned runtime. Hybrid runtimes include CI and CD Ops modules. Hosted runtimes include CD Ops.   |
 |**Managed Cluster**| The number of managed clusters if any, for the runtime. To view list of managed clusters, select the runtime, and then the **Managed Clusters** tab.  To work with managed clusters, see [Adding external clusters to runtimes]({{site.baseurl}}/docs/runtime/managed-cluster).|
 |**Version**| The version of the runtime currently installed. **Update Available!** indicates there are later versions of the runtime. To see all the commits to the runtime, mouse over **Update Available!**, and select **View Complete Change Log**.
 |**Last Updated**| The most recent update information from the runtime to the Codefresh platform. Updates are sent to the platform typically every few minutes. Longer update intervals may indicate networking issues.|
@@ -60,7 +81,7 @@ Here is a description of the information in the List View.
 
 #### Topology view
 
-A hierachical visualization of the provisioned runtimes. The Topology view makes it easy to identify key information such as versions, health and sync status, for both the provisioned runtime and the clusters managed by it.  
+A hierarchical visualization of the provisioned runtimes. The Topology view makes it easy to identify key information such as version, health and sync status, for both the provisioned runtime and the clusters managed by it.  
 Here is an example of the Topology view for runtimes.
   {% include
  image.html
@@ -82,6 +103,161 @@ Here is a description of the information in the Topology view.
 |**Health/Sync status** |The health and sync status of the runtime or cluster. {::nomarkdown}<ul><li><img src="../../../images/icons/error.png" display="inline-block"> indicates health or sync errors in the runtime, or a managed cluster if one was added to the runtime.</br> The runtime or cluster node is bordered in red and the name is colored red.</li> <li><img src="../../../images/icons/cf-sync-status.png" display=inline-block/> indicates that the runtime is being synced to the cluster on which it is provisioned.</li></ul> {:/} |
 |**Search and View options** | {::nomarkdown}<ul><li>Find a runtime or its clusters by typing part of the runtime/cluster name, and then navigate to the entries found. </li> <li>Topology view options: Resize to window, zoom in, zoom out, full screen view.</li></ul> {:/}|
 
+### Update Git tokens for runtimes
+
+Provisioned runtimes require valid Git tokens at all times to authenticate Git actions by you as a user.  
+>These tokens are specific to the user, and the same token can be used for multiple runtimes.
+
+There are two different situations when you need to update Git tokens:  
+* Update invalid, revoked, or expired tokens: Codefresh automatically flags runtimes with such tokens. It is mandatory to update the Git tokens to continue working with the platform. 
+* Update valid tokens: Optional. You may want to update Git tokens, even valid ones, by deleting the existing token and replacing it with a new token.
+
+The methods for updating any Git token are the same regardless of the reason for the update:  
+* OAuth2 authorization, if your admin has registered an OAuth Application for Codefresh
+* Git access token authentication, by generating a personal access token in your Git provider account with the correct scopes
+
+**Before you begin**  
+* To authenticate through a Git access token, make sure your token is valid and has [the required scopes]({{site.baseurl}}/docs/reference/git-tokens) 
+
+**How to**
+1. Do one of the following:
+  * If you see a notification in the Codefresh UI about invalid runtime tokens,  click **[Update Token]**.
+    The Runtimes page shows runtimes with invalid tokens prefixed by the key icon. Mouse over shows invalid token.
+  * To update an existing token, go to [Runtimes](https://g.codefresh.io/2.0/account-settings/runtimes){:target="\_blank"}.
+1. From the List view, select the runtime for which to update the Git token.
+1. From the context menu with the additional actions at the top-right, select **Update Git Runtime Credentials**.
+
+  {% include
+ image.html
+ lightbox="true"
+ file="/images/runtime/update-git-runtime-token.png"
+ url="/images/runtime/update-git-runtime-token.png"
+ alt="Update Git runtime credentials"
+ caption="Update Git runtime credentials"
+  max-width="60%"
+%}
+
+{:start="4"}
+1. Do one of the following: 
+  * If your admin has set up OAuth access, click **Authorize Access to Git Provider**. Go to _step 5_.
+  * Alternatively, authenticate with an access token from your Git provider. Go to _step 6_.
+
+{:start="5"}  
+1. For OAuth2 authorization:
+  > If the application is not registered, you get an error. Contact your admin for help.  
+  * Enter your credentials, and select **Sign In**.
+  * If required, as for example if two-factor authentication is configured, complete the verification. 
+
+    {% include 
+      image.html 
+      lightbox="true" 
+      file="/images/administration/user-settings/oauth-user-authentication.png" 
+      url="/images/administration/user-settings/oauth-user-authentication.png" 
+      alt="Authorizing access with OAuth2" 
+      caption="Authorizing access with OAuth2"
+      max-width="30%" 
+   %}
+
+{:start="6"} 
+1. For Git token authentication, expand **Advanced authorization options**, and then paste the generated token in the **Git runtime token** field.
+
+1. Click **Update Credentials**.
+
+
+### Configure SSH for runtimes
+By default, Git repositories use the HTTPS protocol. You can also use SSH to connect Git repositories by entering the SSH private key.
+
+>When SSH is configured for a runtime, when creating/editing Git-Source applications, you can select HTTPS OR SSH as the protocol to connect to the Git repository. See [Repository URL in Application Source definitions]({{site.baseurl}}/docs/deployment/create-application/#source).
+
+**SSH keys**  
+For more information on generating SSH private keys, see the official documentation:
+* [GitHub](https://help.github.com/en/github/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent){:target="\_blank"}
+* [GitLab](https://docs.gitlab.com/ee/ssh/#generating-a-new-ssh-key-pair){:target="\_blank"}
+* [Bitbucket](https://confluence.atlassian.com/bitbucket/set-up-an-ssh-key-728138079.html){:target="\_blank"}
+* [Azure](https://docs.microsoft.com/en-us/azure/devops/repos/git/use-ssh-keys-to-authenticate?view=azure-devops&tabs=current-page){:target="\_blank"}
+
+**Before you begin**  
+Copy the SSH private key for your Git provider  
+
+
+**How to**  
+1. In the Codefresh UI, make sure you are in [Runtimes](https://g.codefresh.io/2.0/account-settings/runtimes){:target="\_blank"}.
+1. From the **List View**, select the runtime for which to configure SSH.
+1. From the context menu with the additional actions at the top-right, select **Update Git Runtime Credentials**. 
+
+  {% include
+ image.html
+ lightbox="true"
+ file="/images/runtime/update-git-runtime-token.png"
+ url="/images/runtime/update-git-runtime-token.png"
+ alt="Update Git runtime credentials"
+ caption="Update Git runtime credentials"
+  max-width="60%"
+%}
+
+{:start="4"}
+1. Expand **Connect Repo using SSH**, and then paste the raw SSH private key into the field.
+
+{% include
+ image.html
+ lightbox="true"
+ file="/images/runtime/configure-ssh-for-runtimes.png"
+ url="/images/runtime/configure-ssh-for-runtimes.png"
+ alt="Update Git runtime credentials"
+ caption="Update Git runtime credentials"
+  max-width="40%"
+%}
+
+{:start="5"}
+1. Click **Update Credentials**.
+
+### Reset shared configuration repository
+Codefresh creates the [shared configuration repository]({{site.baseurl}}/docs/reference/shared-configuration) when you install the first hybrid or hosted GitOps runtime for your account, and uses it for all runtimes you add to the same account.
+
+If needed, you can reset the location of the shared configuration repository in your account and re-initialize it. For example, when moving from evaluation to production.  
+Uninstall all the existing runtimes in your account, and then run the reset command. On the next installation, Codefresh re-initializes the shared configuration repo.
+ 
+
+>Reset shared configuration repo is supported from CLI v0.1.18 and higher.
+
+
+**Before you begin**   
+[Uninstall every runtime in the account](#uninstall-provisioned-runtimes)
+
+**How to**  
+* Run:  
+  `cf config --reset-shared-config-repo`
+
+
+
+### Upgrade Codefresh CLI
+The Codefresh CLI automatically self-checks its version, and if a newer version is available, prints a banner with the notification.  
+
+ {% include
+    image.html
+  lightbox="true"
+  file="/images/runtime/cli-upgrade-banner.png"
+  url="/images/runtime/cli-upgrade-banner.png"
+  alt="Upgrade banner for Codefresh CLI"
+  caption="Upgrade banner for Codefresh CLI"
+  max-width="40%"
+  %}
+
+You can upgrade to a specific version if you so require, or download the latest version to an output folder to upgrade at your convenience.
+
+
+* Do any of the following:
+  * To upgrade to the latest version, run:  
+    `cf upgrade`
+  * To upgrade to a specific version, even an older version, run:  
+    `cf upgrade --version v<version-number>`  
+    where:  
+    `<version-number>` is the version you want to upgrade to.
+  * To download the latest version to an output file, run:  
+    `cf upgrade --version v<version-number> -o <output-file>`  
+    where:   
+    `<output-file>` is the path to the destination file, for example, `/cli-download`.
+  
 
 ### (Hybrid) Upgrade provisioned runtimes
 
@@ -96,9 +272,9 @@ If you have managed clusters for the hybrid runtime, upgrading the runtime autom
 **Before you begin**  
 For both silent or CLI-wizard based upgrades, make sure you have:  
 
-* The latest version of the Codefresh CLI  
-  Run `cf version` to see your version and [click here](https://github.com/codefresh-io/cli-v2/releases){:target="\_blank"} to compare with the latest CLI version.  
-* A valid runtime Git token
+* The [latest version of the Codefresh CLI](#upgrade-codefresh-cli)  
+  <!--Run `cf version` to see your version and [click here](https://github.com/codefresh-io/cli-v2/releases){:target="\_blank"} to compare with the latest CLI version. --> 
+* A valid Git token with [the required scopes]({{site.baseurl}}/docs/reference/git-tokens) 
 
 **Silent upgrade**  
 
@@ -159,6 +335,23 @@ For both silent or CLI-wizard based upgrades, make sure you have:
   * To manually define the shared configuration repo, add the `--shared-config-repo` flag with the path to the repo.
 1. Confirm to start the upgrade.
 
+
+
+<!---### (Hybrid) Migrate runtimes
+To migrate a tunnel-based runtime to an ingress-based one or vice-versa, you must uninstall the existing runtime and then install a a new tunnel- or ingress-based runtime. 
+You can retain the installation repo used to install the current runtime. Though empty after uninstalling the ingress-less The new installation creates the new manifests in this re
+
+
+>Before uninstalling the ingress-less runtime, you can save specific patches in a temporary location or retrieve the same from the Git history, and re-apply them after installing the ingress-based runtime.
+
+**Before you begin**  
+* Make sure the ingress controller for the new runtime meets [requirements and is configured as needed]({{site.baseurl}}/docs/runtime/requirements/)
+
+**How to**  
+1. Uninstall the ingress-less runtime, as described in [Uninstall provisioned runtimes](#uninstall-provisioned-runtimes) in this article.
+2. Install the new ingress-based runtime, as described in [Install hybrid runtimes]({{site.baseurl}}/docs/runtime/installation/).
+
+--->
 ### Uninstall provisioned runtimes
 
 Uninstall provisioned hybrid and hosted runtimes that are not in use.  Uninstall a runtime by running a silent uninstall, or through the CLI wizard.  
@@ -226,64 +419,6 @@ Pass the mandatory flags in the uninstall command:
 
 
 
-### Update Git runtime tokens
-
-Provisioned runtimes require valid Git tokens to authenticate the runtimes.  
-
-There are two different situations when you need to updating Git runtime tokens:  
-* Update invalid, revoked, or expired tokens: Codefresh automatically flags runtimes with such tokens. It is mandatory to update the Git tokens for these runtimes to continue working with the platform. 
-* Update valid tokens: Optional. You may want to update Git runtime tokens, even valid runtime tokens, by deleting the existing token and replacing it with a new runtime token.
-
-The methods for updating any Git runtime token is the same regardless of the reason for the update:  
-* OAuth2 authorization, if your admin has registered an OAuth Application for Codefresh
-* Git access token authentication, by generating a personal access token in your Git provider account with the correct permissions
-
-**Before you begin**  
-* To authenticate through a Git access token, generate an access token for the runtime with the correct scopes: `repo` and `admin-repo`
-
-**How to**
-1. Do one of the following:
-  * If you see a notification in the Codefresh UI about invalid runtime tokens,  click **[Update Token]**.
-    In the Runtimes page, you can see runtimes with invalid tokens are prefixed by the key icon. Mouse over shows invalid token.
-  * To update an existing runtime token, go to [Runtimes](https://g.codefresh.io/2.0/account-settings/runtimes){:target="\_blank"}.
-1. Select the runtime for which to update the Git token.
-1. From the context menu with the additional actions at the top-right, select **Update Git Runtime token**.
-
-  {% include
- image.html
- lightbox="true"
- file="/images/runtime/update-git-runtime-token.png"
- url="/images/runtime/update-git-runtime-token.png"
- alt="Update Git runtime token option"
- caption="Update Git runtime token option"
-  max-width="40%"
-%}
-
-{:start="4"}
-1. Do one of the following: 
-  * If your admin has set up OAuth access, click **Authorize Access to Git Provider**. Go to _step 5_.
-  * Alternatively, authenticate with an access token from your Git provider. Go to _step 6_.
-
-{:start="5"}  
-1. For OAuth2 authorization:
-  > If the application is not registered, you get an error. Contact your admin for help.  
-  * Enter your credentials, and select **Sign In**.
-  * If required, as for example if two-factor authentication is configured, complete the verification. 
-
-    {% include 
-      image.html 
-      lightbox="true" 
-      file="/images/administration/user-settings/oauth-user-authentication.png" 
-      url="/images/administration/user-settings/oauth-user-authentication.png" 
-      alt="Authorizing access with OAuth2" 
-      caption="Authorizing access with OAuth2"
-      max-width="30%" 
-   %}
-
-{:start="6"} 
-1. For Git token authentication, expand **Advanced authorization options**, and then paste the generated token in the **Git runtime token** field.
-
-1. Click **Update Token**.
 
 
 ### Related articles
