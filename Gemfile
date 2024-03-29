@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'wdm', '>= 0.1.0' if Gem.win_platform?
 
-gem 'jekyll-admin', group: :jekyll_plugins
+gem 'jekyll-admin', '>= 0.11.1', group: :jekyll_plugins
 
 group :development, :test do
   gem 'jekyll', '~> 3.8.4'
@@ -11,5 +11,6 @@ group :development, :test do
   gem 'jekyll-feed', '~> 0.11.0'
   gem 'jekyll-github-metadata', '~> 2.9.4'
   gem 'bootstrap', '~> 4.1.3'
-  gem 'jemoji'
+  gem 'jemoji', '>= 0.10.2'
+  gem 'jekyll-seo-tag'
 end
