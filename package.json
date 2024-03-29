@@ -33,7 +33,9 @@
     "maintenance-dependencies": "ncu -a -x jquery && npm update && bundle update && shx echo \"Manually update assets/js/vendor/*, js/tests/vendor/* and .travis.yml\"",
     "dist": "npm-run-all --parallel css js",
     "watch-css": "nodemon --ignore js/ --ignore dist/ -e scss -x \"npm run css-docs\"",
-    "watch-js": "nodemon --ignore scss/ --ignore js/docs.min.js --ignore dist/ -e js -x \"npm run js-compile\""
+    "watch-js": "nodemon --ignore scss/ --ignore js/docs.min.js --ignore dist/ -e js -x \"npm run js-compile\"",
+    "prepublish": "npm run snyk-protect",
+    "snyk-protect": "snyk-protect"
   },
   "repository": {
     "type": "git",
@@ -43,7 +45,9 @@
     "url": "https://github.com/codefresh-io/docs.codefresh.io/issues"
   },
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "@snyk/protect": "latest"
+  },
   "peerDependencies": {
     "jquery": "1.9.1 - 3",
     "popper.js": "^1.12.9"
@@ -52,6 +56,11 @@
     "@babel/cli": "^7.12.0",
     "@babel/core": "^7.8.7",
     "@babel/preset-env": "7.0.0",
+    "autoprefixer": "^10.0.0",
+    "babel-eslint": "^9.0.0",
+    "babel-plugin-transform-es2015-modules-strip": "^0.1.1",
+    "bootstrap": "^4.0.0",
+    "bundlesize": "^0.18.1",
     "autoprefixer": "^7.2.5",
     "babel-eslint": "^9.0.0",
     "babel-plugin-transform-es2015-modules-strip": "^0.1.1",
@@ -59,11 +68,12 @@
     "bundlesize": "^0.18.2",
     "clean-css-cli": "^4.1.10",
     "cross-env": "^5.1.3",
-    "eslint": "^4.16.0",
+    "eslint": "^6.0.0",
     "eslint-plugin-compat": "^2.2.0",
-    "glob": "^7.1.2",
-    "htmllint-cli": "^0.0.6",
+    "glob": "^9.0.0",
+    "htmllint-cli": "^0.0.7",
     "jsunitsaucelabs": "^1.3.0",
+    "karma": "^6.3.16",
     "karma": "^5.0.8",
     "karma": "^4.2.0",
     "karma-chrome-launcher": "^2.2.0",
@@ -71,6 +81,18 @@
     "karma-firefox-launcher": "^1.1.0",
     "karma-qunit": "^1.2.1",
     "node-sass": "^7.0.2",
+    "nodemon": "^2.0.17",
+    "npm-run-all": "^4.1.2",
+    "popper.js": "^1.12.9",
+    "postcss-cli": "^8.0.0",
+    "qunitjs": "^2.4.1",
+    "rollup": "^0.55.1",
+    "rollup-plugin-babel": "4.0.0",
+    "rollup-plugin-node-resolve": "^3.0.2",
+    "shelljs": "^0.8.5",
+    "shx": "^0.3.0",
+    "sri-toolbox": "^0.2.0",
+    "stylelint": "^14.0.0",
     "node-sass": "^5.0.0",
     "nodemon": "^2.0.0",
     "npm-run-all": "^4.1.2",
@@ -86,11 +108,11 @@
     "stylelint": "^16.1.0",
     "stylelint-config-recommended-scss": "^3.0.0",
     "stylelint-config-standard": "^18.0.0",
-    "stylelint-order": "^0.8.0",
+    "stylelint-order": "^5.0.0",
     "stylelint-scss": "^2.2.0",
-    "uglify-js": "^3.3.9",
+    "uglify-js": "^3.14.3",
     "vnu-jar": "^17.11.1",
-    "workbox-build": "^2.1.2"
+    "workbox-build": "^6.0.0"
   },
   "engines": {
     "node": ">=6"
@@ -111,5 +133,6 @@
     "Safari >= 9",
     "Android >= 4.4",
     "Opera >= 30"
-  ]
+  ],
+  "snyk": true
 }
